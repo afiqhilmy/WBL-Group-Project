@@ -5,3 +5,7 @@ matplotlib
 seaborn
 scikit-learn
 tensorflow-cpu
+langchain
+langchain-community
+langchain-openai
+faiss-cpu
