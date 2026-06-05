@@ -4,8 +4,8 @@ numpy
 matplotlib
 seaborn
 scikit-learn
-tensorflow-cpu
 langchain
 langchain-community
+langchain-core
 langchain-openai
 faiss-cpu
