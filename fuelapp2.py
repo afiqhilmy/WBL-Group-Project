@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import datetime
-from sklearn.preprocessing import MinMaxScaler
 
 # Set page configuration
 st.set_page_config(
@@ -114,7 +113,7 @@ if selected_tab == "🏠 Home Overview":
     with col3:
         st.warning("#### 3. Deep Learning Engine\nRecurrent LSTM Sequence estimation pipelines predicting future LPH thresholds and alert windows.")
 
-    st.image("https://images.unsplash.com/photo-1518364538800-6bae3c2ea0f2?q=80&w=1200", caption="Smart Fleet Ingestion Networks", use_container_width=True)
+    st.image("https://images.unsplash.com/photo-1518364538800-6bae3c2ea0f2?q=80&w=1200", caption="Smart Fleet Ingestion Networks", width='stretch')
 
 # -----------------------------------------------------------------------------
 # 2. TAB: BIG DATA & CLOUD COMPUTING
@@ -142,10 +141,10 @@ elif selected_tab == "☁️ Big Data & Cloud Computing":
     col1, col2 = st.columns(2)
     with col1:
         st.write("**Raw Spark Stream Sample (With Sensor Outliers)**")
-        st.dataframe(raw_data.head(10), use_container_width=True)
+        st.dataframe(raw_data.head(10), width='stretch')
     with col2:
         st.write("**Cleaned Pipeline Dataframe (Post-Outlier Suppression Engine)**")
-        st.dataframe(clean_data.head(10), use_container_width=True)
+        st.dataframe(clean_data.head(10), width='stretch')
         
     # Statistical Descriptions Table
     if st.checkbox("Show Structural Clean Descriptors (Dataset Metrics)"):
