@@ -24,6 +24,95 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# -----------------------------------------------------------------------------
+# INDUSTRIAL DARK THEME - CUSTOM CSS INJECTION
+# -----------------------------------------------------------------------------
+st.markdown("""
+    <style>
+        /* Main Background and Text Colors */
+        .stApp {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+        }
+
+        /* Top Header Styling */
+        h1, h2, h3 {
+            color: #00F0FF !important; /* Neon Cyan */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Sidebar & Menu Buttons Styling */
+        div.stButton > button {
+            background-color: #161b22;
+            color: #00F0FF;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        div.stButton > button:hover {
+            border-color: #FF2E93; /* Neon Magenta */
+            color: #FF2E93;
+            box-shadow: 0 0 10px rgba(255, 46, 147, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Metrics Card Styling */
+        [data-testid="stMetricValue"] {
+            color: #FF2E93 !important;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        [data-testid="stMetricLabel"] {
+            color: #9CA3AF !important;
+            text-transform: uppercase;
+            font-size: 0.8rem !important;
+        }
+
+        /* Container & Card background */
+        div[data-testid="stVerticalBlock"] > div.element-container {
+            background-color: transparent;
+        }
+        
+        .stDataFrame, .stTable {
+            background-color: #111823;
+            border-radius: 10px;
+            border: 1px solid #1f2937;
+        }
+
+        /* Chat Message Styling */
+        .stChatMessage {
+            background-color: #111823 !important;
+            border-radius: 15px !important;
+            border: 1px solid #1f2937 !important;
+            margin-bottom: 10px;
+        }
+
+        /* Slider & Input Styling */
+        .stSlider [data-baseweb="slider"] {
+            background-color: #00F0FF;
+        }
+
+        /* Navigation Launchpad Cards (Containers) */
+        div[data-testid="stVerticalBlock"] > div:has(button[key^="go_"]) {
+            background-color: #111823;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #00F0FF;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Custom Separator */
+        hr {
+            border-top: 1px solid #1f2937;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Hide sidebar expansion option via simple CSS injection for cleaner UI
 st.markdown("""
     <style>
