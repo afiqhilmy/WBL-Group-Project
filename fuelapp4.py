@@ -31,7 +31,9 @@ st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syncopate:wght@400;700&display=swap');
 
-
+    /* Hide sidebar expansion option via simple CSS injection for cleaner UI */
+    [data-testid="stSidebar"] {display: none;}
+    [data-testid="collapsedControl"] {display: none;}
 
     /* Background: Deep Titanium Charcoal blending to True Carbon Black */
     .stApp {
