@@ -25,91 +25,125 @@ st.set_page_config(
 )
 
 # -----------------------------------------------------------------------------
-# INDUSTRIAL DARK THEME - CUSTOM CSS INJECTION
+# HIGH-TECH FUTURISTIC TELEMETRY & NITRO FUEL MONITORING THEME
 # -----------------------------------------------------------------------------
 st.markdown("""
     <style>
-        /* Main Background and Text Colors */
-        .stApp {
-            background-color: #0b0f19;
-            color: #e2e8f0;
-        }
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syncopate:wght@400;700&display=swap');
 
-        /* Top Header Styling */
-        h1, h2, h3 {
-            color: #00F0FF !important; /* Neon Cyan */
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    /* Hide sidebar expansion option via simple CSS injection for cleaner UI */
+    [data-testid="stSidebar"] {display: none;}
+    [data-testid="collapsedControl"] {display: none;}
 
-        /* Sidebar & Menu Buttons Styling */
-        div.stButton > button {
-            background-color: #161b22;
-            color: #00F0FF;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            padding: 0.6rem 1rem;
-            transition: all 0.3s ease;
-        }
+    /* Background: Deep Titanium Charcoal blending to True Carbon Black */
+    .stApp {
+        background: radial-gradient(circle at center, #111823 0%, #0b0f19 50%, #030508 100%) !important;
+        background-attachment: fixed !important;
+    }
+    
+    /* Headlines: Syncopate Font with Nitro Cyan Glow Accent */
+    h1, h2, h3 {
+        font-family: 'Syncopate', sans-serif !important;
+        color: #00F0FF !important; /* Cyberpunk Cyan / Nitro Fuel */
+        text-shadow: 0 0 20px rgba(0, 240, 255, 0.4), 
+                     0 0 5px rgba(255, 255, 255, 0.2);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
 
-        div.stButton > button:hover {
-            border-color: #FF2E93; /* Neon Magenta */
-            color: #FF2E93;
-            box-shadow: 0 0 10px rgba(255, 46, 147, 0.4);
-            transform: translateY(-2px);
-        }
+    /* Metric Cards: Transparent "Smoked Obsidian Glass" with Neon Teal Micro-borders */
+    [data-testid="stMetric"] {
+        background: rgba(11, 20, 32, 0.6) !important;
+        border: 1px solid rgba(0, 240, 255, 0.4) !important;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+        backdrop-filter: blur(12px);
+        transition: all 0.3s ease;
+    }
+    
+    [data-testid="stMetric"]:hover {
+        border: 1px solid rgba(0, 240, 255, 0.8) !important;
+        box-shadow: 0 0 25px rgba(0, 240, 255, 0.25);
+    }
+    
+    /* Metric Labels: Tactical Gray */
+    [data-testid="stMetricLabel"] {
+        font-family: 'Syncopate', sans-serif !important;
+        color: #9CA3AF !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-size: 0.75rem !important;
+    }
+    
+    /* Metric Values: Pure High-Contrast White with Digital Matrix Glow */
+    [data-testid="stMetricValue"] {
+        font-family: 'Share Tech Mono', monospace !important;
+        color: #FFFFFF !important;
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+        font-size: 2.2rem !important;
+    }
 
-        /* Metrics Card Styling */
-        [data-testid="stMetricValue"] {
-            color: #FF2E93 !important;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        
-        [data-testid="stMetricLabel"] {
-            color: #9CA3AF !important;
-            text-transform: uppercase;
-            font-size: 0.8rem !important;
-        }
+    /* Buttons: Kinetic Cyan Fill to High-contrast Text */
+    .stButton>button {
+        background-color: #00F0FF !important;
+        color: #030508 !important; /* Dark text on bright button */
+        font-family: 'Syncopate', sans-serif !important;
+        font-weight: bold !important;
+        border-radius: 6px !important;
+        border: 1px solid #FFFFFF !important;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        letter-spacing: 1px;
+    }
 
-        /* Container & Card background */
-        div[data-testid="stVerticalBlock"] > div.element-container {
-            background-color: transparent;
-        }
-        
-        .stDataFrame, .stTable {
-            background-color: #111823;
-            border-radius: 10px;
-            border: 1px solid #1f2937;
-        }
+    .stButton>button:hover {
+        box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+        transform: translateY(-2px);
+        background-color: #FFFFFF !important;
+        color: #010409 !important;
+    }
 
-        /* Chat Message Styling */
-        .stChatMessage {
-            background-color: #111823 !important;
-            border-radius: 15px !important;
-            border: 1px solid #1f2937 !important;
-            margin-bottom: 10px;
-        }
+    /* Slider Track: High-Octane Linear Influx (Teal to Warning Red Gradient) */
+    div[data-baseweb="slider"] > div > div {
+        background: linear-gradient(90deg, #00F0FF 0%, #FF2E93 100%) !important;
+    }
+    div[role="slider"] {
+        background-color: #00F0FF !important;
+        box-shadow: 0 0 15px #00F0FF !important;
+        border: 2px solid #FFFFFF !important;
+    }
 
-        /* Slider & Input Styling */
-        .stSlider [data-baseweb="slider"] {
-            background-color: #00F0FF;
-        }
+    /* Dataframe/Table: Deep Fleet Obsidian Grid matrix */
+    .stDataFrame {
+        background-color: rgba(7, 11, 19, 0.8);
+        border: 1px solid rgba(0, 240, 255, 0.2);
+        border-radius: 8px;
+    }
 
-        /* Navigation Launchpad Cards (Containers) */
-        div[data-testid="stVerticalBlock"] > div:has(button[key^="go_"]) {
-            background-color: #111823;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid #00F0FF;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-        }
+    /* Alerts and Status Container boxes */
+    [data-testid="stAlert"] {
+        background-color: rgba(9, 16, 26, 0.8) !important;
+        color: #00F0FF !important;
+        border: 1px solid rgba(0, 240, 255, 0.4) !important;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+        font-family: 'Share Tech Mono', monospace !important;
+    }
 
-        /* Custom Separator */
-        hr {
-            border-top: 1px solid #1f2937;
-        }
+    /* Chat Message Styling */
+    .stChatMessage {
+        background-color: #111823 !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(0, 240, 255, 0.2) !important;
+    }
+
+    /* Global Text Body Override to keep readable color contrast against dark views */
+    .stMarkdown p, .stMarkdown span, label, div[data-testid="stCaptureContainer"] p {
+        font-family: 'Share Tech Mono', monospace !important;
+        color: #E5E7EB !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
