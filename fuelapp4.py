@@ -145,27 +145,38 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Modern High-Tech Style Override (Fixes Sliders and Sidebar)
+# Style Override (Removes blocky backgrounds, leaves clean blue numbers)
 st.markdown("""
     <style>
-    /* Hide sidebar elements */
-    [data-testid="stSidebar"] {display: none;}
-    [data-testid="collapsedControl"] {display: none;}
+        /* Hide sidebar elements */
+        [data-testid="stSidebar"] {display: none;}
+        [data-testid="collapsedControl"] {display: none;}
 
-    /* Fix and Color Slider Boundaries (Min/Max Numbers) */
-    div[data-testid="stSliderTickBar"] + div, 
-    div[data-baseweb="slider"] + div {
-        font-family: monospace !important;
-        color: #00F0FF !important;   /* Sets the numbers to your clean theme blue */
-        font-size: 0.9rem !important;
-        font-weight: bold !important;
-    }
+        /* Fix the layout container so the numbers are not squeezed or cut off */
+        div[data-baseweb="slider"] + div {
+            margin-top: 10px !important;
+        }
 
-    /* Strip away the blocky, squeezed background shapes around the min/max values */
-    div[data-baseweb="slider"] > div:last-child > div {
-        background-color: transparent !important;
-        color: #00F0FF !important;
-    }
+        /* STRIP THE BACKGROUND BOX: Targets the min/max numerical container */
+        div[data-baseweb="slider"] > div:last-child > div {
+            background: transparent !important;
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+        /* STYLE THE TEXT ONLY: Makes the min/max numbers a clean, static neon blue */
+        div[data-testid="stSliderTickBar"] + div span,
+        div[data-baseweb="slider"] + div span,
+        div[data-baseweb="slider"] > div:last-child > div {
+            color: #00F0FF !important;
+            font-family: monospace !important;
+            font-size: 0.95rem !important;
+            font-weight: bold !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
