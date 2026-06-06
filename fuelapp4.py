@@ -45,8 +45,6 @@ st.markdown("""
     h1, h2, h3 {
         font-family: 'Syncopate', sans-serif !important;
         color: #00F0FF !important; /* Cyberpunk Cyan / Nitro Fuel */
-        text-shadow: 0 0 20px rgba(0, 240, 255, 0.4), 
-                     0 0 5px rgba(255, 255, 255, 0.2);
         letter-spacing: 3px;
         text-transform: uppercase;
     }
