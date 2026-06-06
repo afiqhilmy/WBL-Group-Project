@@ -145,11 +145,27 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Hide sidebar expansion option via simple CSS injection for cleaner UI
+# Modern High-Tech Style Override (Fixes Sliders and Sidebar)
 st.markdown("""
     <style>
-        [data-testid="stSidebar"] {display: none;}
-        [data-testid="collapsedControl"] {display: none;}
+    /* Hide sidebar elements */
+    [data-testid="stSidebar"] {display: none;}
+    [data-testid="collapsedControl"] {display: none;}
+
+    /* Fix and Color Slider Boundaries (Min/Max Numbers) */
+    div[data-testid="stSliderTickBar"] + div, 
+    div[data-baseweb="slider"] + div {
+        font-family: monospace !important;
+        color: #00F0FF !important;   /* Sets the numbers to your clean theme blue */
+        font-size: 0.9rem !important;
+        font-weight: bold !important;
+    }
+
+    /* Strip away the blocky, squeezed background shapes around the min/max values */
+    div[data-baseweb="slider"] > div:last-child > div {
+        background-color: transparent !important;
+        color: #00F0FF !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
