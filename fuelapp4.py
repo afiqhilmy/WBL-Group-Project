@@ -24,11 +24,70 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Hide sidebar expansion option via simple CSS injection for cleaner UI
+# -----------------------------------------------------------------------------
+# EXECUTIVE FUEL MONITORING PROFESSIONAL THEME (CSS INJECTION)
+# -----------------------------------------------------------------------------
 st.markdown("""
     <style>
+        /* Hide default sidebar navigation elements */
         [data-testid="stSidebar"] {display: none;}
         [data-testid="collapsedControl"] {display: none;}
+        
+        /* Global Typography & Font Family */
+        html, body, [class*="css"], .stMarkdown {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        /* Main App Background Contrast Fix */
+        .stApp {
+            background-color: #F8F9FA;
+        }
+        
+        /* Titles & Headings Style */
+        h1, h2, h3 {
+            color: #1A2530 !important;
+            font-weight: 700 !important;
+            letter-spacing: -0.5px;
+        }
+        
+        /* Professional Container / Card Styling */
+        div[data-testid="stElementContainer"] > div.element-container:has(div.stButton) {
+            border-radius: 8px;
+        }
+        
+        .stButton > button {
+            border-radius: 6px !important;
+            font-weight: 600 !important;
+            transition: all 0.2s ease-in-out !important;
+        }
+        
+        /* Primary Dashboard Actions (Fleet Teal / Amber accents) */
+        .stButton > button[kind="primary"] {
+            background-color: #00A896 !important;
+            border: none !important;
+            color: white !important;
+            box-shadow: 0 2px 4px rgba(0,168,150,0.2) !important;
+        }
+        
+        .stButton > button[kind="primary"]:hover {
+            background-color: #008F80 !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,168,150,0.3) !important;
+        }
+        
+        /* Metric Block Professional Enhancements */
+        div[data-testid="stMetricValue"] {
+            font-size: 2rem !important;
+            font-weight: 700 !important;
+            color: #111827 !important;
+        }
+        
+        div[data-testid="stMetricLabel"] {
+            font-size: 0.85rem !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            color: #6B7280 !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -119,7 +178,6 @@ def initialize_rag_engine():
     if not langchain_available:
         return None, False
 
-    # We use a placeholder key to avoid startup crashes if secrets aren't set yet
     api_key = "PLACEHOLDER_KEY"
     try:
         api_key = st.secrets.get("OPENAI_API_KEY", "PLACEHOLDER_KEY")
@@ -147,7 +205,6 @@ def initialize_rag_engine():
         qa_chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=vector_store.as_retriever())
         return qa_chain, True
     except Exception as e:
-        # Graceful fallback engine if API Key isn't configured in production yet
         return None, False
 
 qa_engine, rag_ready = initialize_rag_engine()
@@ -173,11 +230,11 @@ if st.session_state.current_page == "Home":
     st.markdown("Click on any architecture domain module below to review live data pipelines, sequential metrics, model inference targets, or our AI Assistant:")
     st.write("")
 
-    # Create 4 distinct horizontal layout structural modules
+    # Create 4 distinct horizontal layout structural modules wrapped in styled UI cards
     menu_col1, menu_col2, menu_col3, menu_col4 = st.columns(4)
 
     with menu_col1:
-        with st.container():
+        with st.container(border=True):
             st.markdown("### ☁️ Big Data & Cloud")
             st.write("Ingestion frameworks via GCP Bucket targets and PySpark structured telemetry validation matrices.")
             st.write("")
@@ -185,7 +242,7 @@ if st.session_state.current_page == "Home":
                 navigate_to("Cloud")
 
     with menu_col2:
-        with st.container():
+        with st.container(border=True):
             st.markdown("### 📡 Internet of Things")
             st.write("Chronological time-series monitoring tracking concurrent vehicular edge telemetry via dynamic streaming lines.")
             st.write("")
@@ -193,7 +250,7 @@ if st.session_state.current_page == "Home":
                 navigate_to("IoT")
 
     with menu_col3:
-        with st.container():
+        with st.container(border=True):
             st.markdown("### 🤖 Deep Learning Core")
             st.write("Recurrent LSTM Sequence estimation pipelines predicting future LPH thresholds, sweet spots, and alert windows.")
             st.write("")
@@ -201,7 +258,7 @@ if st.session_state.current_page == "Home":
                 navigate_to("LSTM")
 
     with menu_col4:
-        with st.container():
+        with st.container(border=True):
             st.markdown("### 💬 Fleet Copilot (RAG)")
             st.write("Advanced LLM Chat assistant trained specifically on operational fuel policies, theft rules, and driver efficiency keys.")
             st.write("")
@@ -210,7 +267,7 @@ if st.session_state.current_page == "Home":
 
     st.write("")
     st.write("---")
-    st.image("https://images.unsplash.com/photo-1518364538800-6bae3c2ea0f2?q=80&w=1200", caption="Smart Fleet Ingestion Networks", width='stretch')
+    st.image("https://images.unsplash.com/photo-1518364538800-6bae3c2ea0f2?q=80&w=1200", caption="Smart Fleet Ingestion Networks", use_container_width=True)
 
 # -----------------------------------------------------------------------------
 # PAGE 5: ADVANCED HIGH-LEVEL RAG CHATBOT PAGE
@@ -219,11 +276,9 @@ elif st.session_state.current_page == "RAG_Chat":
     st.header("💬 Intelligent Fleet Copilot (LangChain RAG Node)")
     st.markdown("This section utilizes text embeddings inside a local vector index to contextually anchor AI responses. Drivers and Managers can query domain-specific guidelines interactively.")
     
-    # Validation alert regarding OpenAI Access Tokens
     if not rag_ready or st.secrets.get("OPENAI_API_KEY") is None:
         st.warning("⚠️ **OpenAI API Key Not Found in Streamlit Secrets!** Showing the high-level interactive interface using rule-based simulation engine context.")
     
-    # Quick Action Query Suggestion Chips
     st.write("**Frequently Asked Operational Scenarios:**")
     suggest_col1, suggest_col2, suggest_col3 = st.columns(3)
     with suggest_col1:
@@ -241,18 +296,15 @@ elif st.session_state.current_page == "RAG_Chat":
 
     st.write("---")
     
-    # Display message bubbles using modern layout syntax
     for msg in st.session_state.current_page == "RAG_Chat" and st.session_state.chat_history:
         with st.chat_message(msg["role"]):
             st.write(msg["content"])
             
-    # Capture dynamic user dialogue input
     if prompt := st.chat_input("Ask Copilot anything about fuel usage, idling, or theft markers..."):
         with st.chat_message("user"):
             st.write(prompt)
         st.session_state.chat_history.append({"role": "user", "content": prompt})
         
-        # Ingestion logic processing query context
         with st.chat_message("assistant"):
             with st.spinner("Retrieving facts from context logs..."):
                 if rag_ready and qa_engine is not None:
@@ -261,7 +313,6 @@ elif st.session_state.current_page == "RAG_Chat":
                     except Exception as e:
                         response = f"API Error encountered during LangChain vector query extraction. Details: {str(e)}"
                 else:
-                    # High-fidelity simulation backup matrix if developer hasn't linked secret API key yet
                     lower_prompt = prompt.lower()
                     if "speed" in lower_prompt or "driver" in lower_prompt or "conserve" in lower_prompt:
                         response = "📋 **Copilot Core Retrieval:** According to Driver Guideline reference frames, operators must stabilize heavy transport units between **70 to 85 KPH** and maintain engine RPM strictly under **1600 RPM**. Spiking past these values forces excessive load weights on engine valves and increases fuel usage by up to 14.2% per deployment cycle."
@@ -275,14 +326,13 @@ elif st.session_state.current_page == "RAG_Chat":
                 st.write(response)
         st.session_state.chat_history.append({"role": "assistant", "content": response})
 
-    # Clear chat utility button
     if st.session_state.chat_history:
         st.write("")
         if st.button("🗑️ Clear Conversation Logs"):
             st.session_state.chat_history = []
             st.rerun()
 
-# --- KEEP PREVIOUS PAGE CONDITIONALS EXACTLY AS THEY WERE ---
+# --- PREVIOUS PAGE CONDITIONALS ---
 elif st.session_state.current_page == "Cloud":
     st.header("☁️ Big Data Infrastructure & Base EDA")
     with st.expander("Review Active Backend GCP Environment Initialization Log"):
@@ -299,15 +349,19 @@ elif st.session_state.current_page == "Cloud":
     col1, col2 = st.columns(2)
     with col1:
         st.write("**Raw Spark Stream Sample (With Sensor Outliers)**")
-        st.dataframe(raw_data.head(10), width='stretch')
+        st.dataframe(raw_data.head(10), use_container_width=True)
     with col2:
         st.write("**Cleaned Pipeline Dataframe (Post-Outlier Suppression Engine)**")
-        st.dataframe(clean_data.head(10), width='stretch')
+        st.dataframe(clean_data.head(10), use_container_width=True)
     if st.checkbox("Show Structural Clean Descriptors (Dataset Metrics)"):
         st.write(clean_data.describe())
     st.write("---")
     st.markdown("### 📈 Static Exploratory Data Analysis (EDA Chart Registry)")
     eda_selection = st.multiselect("Choose Charts to Plot:", ["Correlation Heatmap Matrix", "Fuel Consumption Distribution", "Engine Feature Quantiles", "Brand Consumption Breakdown"])
+    
+    # Update Seaborn configurations for matching high-fidelity plots
+    sns.set_theme(style="whitegrid")
+    
     if "Correlation Heatmap Matrix" in eda_selection:
         st.markdown("#### Feature Correlation Matrix")
         fig, ax = plt.subplots(figsize=(10, 6))
@@ -316,7 +370,7 @@ elif st.session_state.current_page == "Cloud":
     if "Fuel Consumption Distribution" in eda_selection:
         st.markdown("#### Distribution of Fuel Consumption Target Line (LPH)")
         fig, ax = plt.subplots(figsize=(10, 4))
-        sns.histplot(clean_data['fuel_consumption_lph'], kde=True, bins=30, color="blue", ax=ax)
+        sns.histplot(clean_data['fuel_consumption_lph'], kde=True, bins=30, color="#00A896", ax=ax)
         st.pyplot(fig)
     if "Engine Feature Quantiles" in eda_selection:
         st.markdown("#### Feature Distributions Over Product Classes")
@@ -421,8 +475,8 @@ elif st.session_state.current_page == "LSTM":
     actual_curve = np.sin(np.linspace(0, 10, sample_size)) * 10 + 25 + np.random.normal(0, 1, sample_size)
     pred_curve = actual_curve + np.random.normal(0, 0.6, sample_size)
     fig, ax = plt.subplots(figsize=(12, 4))
-    ax.plot(actual_curve, label="True Telemetry Record Target (LPH)", color="blue", alpha=0.75, marker='o')
-    ax.plot(pred_curve, label="Deep Learning LSTM Estimation Output (LPH)", color="orange", linestyle="--", marker='x')
+    ax.plot(actual_curve, label="True Telemetry Record Target (LPH)", color="#00A896", alpha=0.75, marker='o')
+    ax.plot(pred_curve, label="Deep Learning LSTM Estimation Output (LPH)", color="#FF9F1C", linestyle="--", marker='x')
     ax.set_ylabel("Fuel Consumption Outflow (LPH)")
     ax.set_xlabel("Chronological Sequence Index Over Time Window (Test Frame Split)")
     ax.legend(loc="upper right")
